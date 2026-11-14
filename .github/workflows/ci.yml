@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+          # Enable setup-node npm caching after committing package-lock.json.
       # A lockfile will be committed after the first networked npm install.
       - run: npm install --no-audit --no-fund
       - run: npm run typecheck
