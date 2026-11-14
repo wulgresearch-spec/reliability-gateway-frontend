@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Activity, Box, CheckCheck, ChevronRight, CircuitBoard, Code2, Fingerprint, GitBranch, Layers3, ShieldCheck, Sparkles } from "lucide-react";
 import { PipelinePreview } from "@/components/pipeline-preview";
+import { BrandGallery } from "@/components/brand-gallery";
+import { BrandStory, TrustBanner } from "@/components/brand-story";
 import { SectionHeading } from "@/components/section-heading";
 
 const capabilities = [
@@ -38,6 +40,7 @@ export default function HomePage() {
         <div className="problem-grid"><div className="problem-note"><div className="problem-label"><span className="problem-x">×</span> WITHOUT A SHARED BOUNDARY</div><h3>Every team rebuilds the safety net.</h3><p>Retry logic, provider failures, schema checks, policy decisions, streaming issues and observability become scattered application code.</p><div className="problem-code">200 OK <span>≠</span> valid business output</div></div>
         <div className="solution-note"><div className="problem-label"><span className="solution-check">✓</span> WITH RELIABILITY GATEWAY</div><h3>One place to enforce the path.</h3><p>Keep prompts, RAG, memory and business rules in your app. Put common model-call reliability and control concerns into the gateway.</p><div className="solution-code"><ShieldCheck size={17}/> Every request follows the pipeline</div></div></div>
       </div></section>
+      <BrandStory />
       <section className="section section-ice"><div className="container"><SectionHeading eyebrow="BUILT-IN CAPABILITIES" title="Infrastructure that makes AI dependable." description="Not another chatbot. A purposeful execution layer that helps your team focus on the AI experience instead of reinventing its guardrails."/>
         <div className="feature-grid">{capabilities.map(({icon: Icon,title,text},i)=><div className="feature-card" key={title}><div className="feature-card-icon"><Icon size={24}/></div><span className="feature-index">0{i+1} / CAPABILITY</span><h3>{title}</h3><p>{text}</p><Link href="/platform" className="text-link">Explore capability <ArrowUpRight size={16}/></Link></div>)}</div>
       </div></section>
@@ -48,6 +51,8 @@ export default function HomePage() {
       <section className="section section-white"><div className="container"><SectionHeading eyebrow="BUILT FOR REAL APPLICATIONS" title="Your business logic stays yours." description="Use your existing LLM tools. Let Reliability Gateway own the model-call boundary, not the decisions only your business can make."/>
         <div className="usecase-grid"><Link href="/solutions#insurance" className="usecase-card"><span className="usecase-icon"><Fingerprint size={26}/></span><span className="eyebrow">INSURANCE</span><h3>Claims processing you can explain.</h3><p>Your app retrieves policies and evaluates claims. The gateway handles access, response structure, streams, and usage.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link><Link href="/solutions#support" className="usecase-card"><span className="usecase-icon"><Sparkles size={26}/></span><span className="eyebrow">CUSTOMER SUPPORT</span><h3>Customer answers with better control.</h3><p>Use RAG and CRM context for helpful replies, with a consistent model request path underneath.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link></div>
       </div></section>
+      <TrustBanner />
+      <BrandGallery />
       <section className="section section-ice"><div className="container developer-teaser"><div><span className="eyebrow">FOR BUILDERS</span><h2>Built for engineers who care how systems behave.</h2><p>Java backend. Clear contracts. Real integration tests. A growing API surface designed around reliable execution—not inflated feature claims.</p><div className="hero-actions"><Link className="btn btn-dark" href="/docs"><Code2 size={18}/> Read developer docs</Link><Link className="btn btn-outline" href="/login"><Box size={18}/> Open console</Link></div></div><div className="code-surface"><div className="code-surface-bar"><i/><i/><i/><span>gateway / request path</span></div><pre>{`POST /v1/chat/completions\n\nIngress       → ACCEPTED\nAuthentication→ VERIFIED\nGovernance    → ALLOWED\nProvider      → COMPLETED\nStreamGuard   → COMPLETE\nSchemaLock    → VALID\nMetering      → RECORDED\n\n// Illustration, not live output`}</pre></div></div></section>
       <section className="cta-band"><div className="container cta-band-inner"><div><span className="eyebrow">BUILD WITH CONFIDENCE</span><h2>Give your AI an accountable foundation.</h2><p>Explore the platform, understand the architecture, and connect the Java gateway when you are ready.</p></div><Link className="btn btn-light btn-lg" href="/how-it-works">Explore the architecture <ArrowUpRight size={18}/></Link></div></section>
     </>
