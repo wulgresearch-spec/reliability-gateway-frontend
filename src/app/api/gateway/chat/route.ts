@@ -11,6 +11,8 @@ export const dynamic = "force-dynamic";
 export async function POST(request: NextRequest) {
   if (!(await isOperatorAuthenticated())) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   if (!isSameOrigin(request)) return NextResponse.json({ error: "Cross-origin request refused" }, { status: 403 });
+  // Isolated infrastructure pilot: never forward prompts to a provider.
+  if (process.env.GATEWAY_PILOT_HEALTH_ONLY === "true") return NextResponse.json({ error: "AI requests are disabled for this health-only pilot" }, { status: 503, headers: { "Cache-Control": "no-store" } });
   const env = gatewayEnvironment();
   if (!env.connected) return NextResponse.json({ error: "Configure the backend connection first" }, { status: 503 });
 

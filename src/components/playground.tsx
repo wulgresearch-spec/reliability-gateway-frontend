@@ -33,12 +33,13 @@ export function Playground() {
   const [stream, setStream] = useState(false);
   const [model, setModel] = useState<string | null>(null);
   const [configured, setConfigured] = useState<boolean | null>(null);
+  const [healthOnly, setHealthOnly] = useState(false);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState<Output>(initial);
   const controller = useRef<AbortController | null>(null);
-  useEffect(() => { void (async () => { try { const response = await fetch("/api/gateway/status",{cache:"no-store"}); const data = (await response.json()) as GatewayStatus; setModel(data.model); setConfigured(data.configured); } catch { setConfigured(false); } })(); return () => controller.current?.abort(); }, []);
+  useEffect(() => { void (async () => { try { const response = await fetch("/api/gateway/status",{cache:"no-store"}); const data = (await response.json()) as GatewayStatus; setModel(data.model); setConfigured(data.configured); setHealthOnly(data.healthOnly === true); } catch { setConfigured(false); } })(); return () => controller.current?.abort(); }, []);
   async function execute() {
-    if (running || !configured || !prompt.trim()) return;
+    if (running || !configured || healthOnly || !prompt.trim()) return;
     const ctrl = new AbortController(); controller.current = ctrl;
     const started = performance.now(); setOutput(initial); setRunning(true);
     try {
@@ -66,13 +67,14 @@ export function Playground() {
     } catch(e) { if(ctrl.signal.aborted) setOutput(prev=>({...prev,error:"Request cancelled",complete:false})); else setOutput(prev=>({...prev,error:e instanceof Error?e.message:"Request failed"})); }
     finally { setRunning(false); controller.current=null; }
   }
-  const disabled = !configured || !model;
+  const disabled = !configured || !model || healthOnly;
   return <><div className="console-heading"><div><span className="eyebrow">TEST / MODEL EXECUTION</span><h1>API Playground.</h1><p>Send a real request through the Java Reliability Gateway. Your server-side credentials never reach the browser.</p></div><span className="playground-type"><Sparkles size={16}/> Live gateway test</span></div>
   <div className="playground-grid"><section className="console-panel playground-editor"><div className="panel-title"><div><span className="eyebrow">REQUEST</span><h2>Configure your prompt</h2></div><Braces size={20}/></div>
     <label className="form-label" htmlFor="model">Configured model</label><input className="form-input" id="model" readOnly value={model ?? "Configure GATEWAY_MODEL on the server"} aria-describedby="model-info"/><p id="model-info" className="field-note">Model selection is server-controlled to prevent unapproved routing.</p>
     <label className="form-label" htmlFor="prompt">Message to AI</label><textarea className="prompt-input" id="prompt" value={prompt} onChange={e=>setPrompt(e.target.value)} maxLength={4000} rows={9} placeholder="Enter a request…" disabled={running}/>
     <div className="prompt-meta"><span>Application prompt</span><span>{prompt.length} / 4,000 characters</span></div>
     <div className="playground-toggle"><div><Waves size={18}/><div><strong>Stream response</strong><span>Read text incrementally as the provider sends it</span></div></div><label className="switch" aria-label="Stream response"><input type="checkbox" checked={stream} onChange={e=>setStream(e.target.checked)} disabled={running}/><span/></label></div>
+    {healthOnly && <p className="inline-error" role="status"><CircleAlert size={17}/> Health-only pilot: model requests are disabled. Test /health and /ready in the Health console.</p>}
     {!configured && <p className="inline-error" role="status"><CircleAlert size={17}/> Gateway configuration is missing. See <code>.env.example</code>.</p>}
     <div className="playground-footer"><span><CornerDownLeft size={15}/> Secure server-side proxy</span>{running?<button className="btn btn-outline" onClick={()=>controller.current?.abort()}><Square size={15}/> Stop</button>:<button className="btn btn-dark" onClick={()=>void execute()} disabled={disabled || !prompt.trim()}><Play size={16}/> Run request</button>}</div>
   </section>
