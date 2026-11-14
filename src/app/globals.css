@@ -285,3 +285,149 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .brand-gallery-caption strong { font-size: 15px; }
   .scenario-thumbnail { height: 170px; }
 }
+
+
+/* 2026 typography and icon refresh: intentional editorial styling and restrained colors. */
+:root {
+  --navy: #1c3052;
+  --navy-deep: #142644;
+  --ice: #f5f7fa;
+  --ink: #1c3052;
+  --line: #e0e6ef;
+  --muted: #69788e;
+  --soft: #fafbfd;
+  --accent: #edf3fb;
+  --shadow: 0 12px 32px rgb(22 39 66 / 5%);
+}
+body {
+  background: #f5f7fa;
+  color: var(--ink);
+  font-family: var(--font-body), Inter, ui-sans-serif, system-ui, sans-serif;
+}
+h1, h2, h3, h4, h5, h6, .btn, .brand-wordmark,
+.desktop-nav a, .eyebrow, .hero-copy h1, .subpage-hero h1,
+.step-row h3, .resource-card h3, .feature-card h3, .platform-card h3,
+.stage-tile strong {
+  font-family: var(--font-heading), Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+}
+.section-ice, .hero-section, .subpage-hero { background: #f5f7fa; }
+.section-white { background: #fff; }
+.site-header { background: #fff; border-color: #e6ebf1; }
+.hero-copy h1 span, .subpage-hero h1 span { color: #526a8d; }
+.eyebrow, .feature-index, .flow-label, .problem-label {
+  color: #627995; letter-spacing: .13em;
+}
+.feature-card, .platform-card, .resource-card, .usecase-card,
+.problem-note, .solution-note, .scenario-flow, .responsibility-card,
+.disclaimer-panel {
+  background: #fff; border: 1px solid #e1e7ef; border-radius: 16px;
+  box-shadow: 0 6px 26px rgb(22 39 66 / 3%);
+}
+.feature-card:hover, .platform-card:hover, .resource-card:hover,
+.usecase-card:hover, .step-row:hover {
+  box-shadow: 0 17px 35px rgb(22 39 66 / 9%); transform: translateY(-3px);
+}
+.feature-grid, .platform-grid { gap: 18px; }
+.feature-card, .platform-card { padding: 31px 27px; }
+.feature-card .feature-index, .platform-card .eyebrow {
+  display: inline-block; margin-bottom: 26px;
+  font-size: 10px; letter-spacing: .14em; font-weight: 800;
+}
+.feature-card h3, .platform-card h3 {
+  margin: 0 0 13px; font-weight: 780;
+  font-size: 20px; letter-spacing: -.037em; line-height: 1.32;
+}
+.feature-card p, .platform-card p {
+  font-size: 13px; line-height: 1.82; color: #63758c;
+  min-height: auto; margin: 0;
+}
+.feature-card .text-link { margin-top: 30px; }
+.usecase-card { min-height: 290px; padding: 35px; }
+.usecase-card .eyebrow { margin-bottom: 22px; }
+.usecase-card h3 { margin-top: 0; color: var(--navy); }
+.usecase-card p { color: #65768d; }
+.problem-grid h3, .usecase-card h3, .responsibility-card h3,
+.resource-card h3, .section-heading h2, .scenario-copy h2 {
+  letter-spacing: -.042em;
+}
+.stage-grid { gap: 13px; }
+.stage-tile {
+  background: #253b5a; border: 1px solid #3a5273;
+  border-radius: 12px; padding: 16px 18px; min-height: 80px;
+}
+.stage-tile span {
+  width: 40px; height: 40px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border: 1px solid #456080; border-radius: 9px;
+  background: #304967; color: #dce7f6;
+  font-weight: 760; font-size: 12px;
+}
+.stage-tile strong { color: #fff; font-size: 14px; letter-spacing: -.02em; }
+.stage-tile > svg { display: none; }
+.steps-list { gap: 16px 22px; }
+.step-row {
+  display: grid; grid-template-columns: 50px 1fr;
+  grid-template-areas: "no title" "no desc";
+  gap: 3px 16px; align-content: start;
+  padding: 22px; background: #fff;
+  border: 1px solid #e1e7ef; border-radius: 13px;
+  min-height: 145px; transition: transform .2s, box-shadow .2s;
+}
+.step-number {
+  grid-area: no; display: grid; place-items: center;
+  width: 44px; height: 44px;
+  padding: 0; background: transparent; border: 1px solid #d9e2ef;
+  border-radius: 9px; color: #7088a8; font-size: 13px;
+}
+.step-row h3 { grid-area: title; font-size: 17px; font-weight: 790; margin: 0 0 8px; }
+.step-row p {
+  grid-area: desc; max-width: none; font-size: 12px;
+  line-height: 1.72; margin: 0; color: #687a90;
+}
+.responsibility-card { padding: 35px; }
+.responsibility-index {
+  display: inline-block; font-size: 11px; font-weight: 780;
+  letter-spacing: .14em; color: #627b9d;
+  margin-bottom: 27px;
+}
+.responsibility-dark { background: var(--navy); border-color: var(--navy); }
+.responsibility-dark .responsibility-index { color: #b7c8df; }
+.callout-type {
+  flex: 0 0 auto; display: grid; place-items: center;
+  width: 155px; height: 155px;
+  font-family: var(--font-heading), Manrope, system-ui, sans-serif;
+  font-size: 102px; font-weight: 500; line-height: 1;
+  color: #dae5f5; border: 1px solid #49627e;
+  border-radius: 18px; background: #2a4262;
+}
+.mini-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+.mini-links a {
+  display: flex; min-width: 0; min-height: 93px; gap: 12px;
+  padding: 24px; background: #fff; border: 1px solid #e1e7ef;
+  border-radius: 12px; font-size: 14px; font-weight: 780;
+  transition: transform .2s, box-shadow .2s;
+}
+.mini-links a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.mini-links a svg { margin-left: auto; flex-shrink: 0; width: 17px; height: 17px; }
+.resource-grid { gap: 17px; }
+.resource-card { min-height: 278px; padding: 30px 27px; }
+.resource-index {
+  font-size: 10px; font-weight: 800; letter-spacing: .14em;
+  color: #607b9d; padding-bottom: 28px;
+}
+.resource-card h3 { margin: 0 0 13px; font-size: 20px; line-height: 1.35; }
+.resource-card p { margin: 0; line-height: 1.86; color: #66778e; }
+.resource-card > span:last-child { padding-top: 28px; color: var(--navy); }
+.docs-snippet, .code-surface, .pipeline-visual { border-radius: 15px; }
+@media(max-width:900px) {
+  .mini-links { grid-template-columns: 1fr; }
+}
+@media(max-width:650px) {
+  .stage-tile { min-height: 72px; padding: 12px; }
+  .stage-tile span { width: 34px; height: 38px; }
+  .stage-tile strong { font-size: 12px; }
+  .feature-card, .platform-card, .resource-card, .usecase-card, .responsibility-card { padding: 25px; }
+  .step-row { padding: 18px; min-height: 0; grid-template-columns: 44px 1fr; }
+  .resource-card h3, .feature-card h3, .platform-card h3 { font-size: 18px; }
+  .callout-type { width: 120px; height: 120px; font-size: 80px; margin-top: 23px; }
+}

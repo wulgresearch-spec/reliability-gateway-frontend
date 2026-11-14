@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Activity, Box, CheckCheck, ChevronRight, CircuitBoard, Code2, Fingerprint, GitBranch, Layers3, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Box, CheckCheck, ChevronRight, Code2, ShieldCheck } from "lucide-react";
 import { PipelinePreview } from "@/components/pipeline-preview";
 import { BrandGallery } from "@/components/brand-gallery";
 import { BrandStory, TrustBanner } from "@/components/brand-story";
 import { SectionHeading } from "@/components/section-heading";
 
 const capabilities = [
-  { icon: ShieldCheck, title: "Governance at the boundary", text: "Authenticate callers and evaluate policy before a model request leaves your application." },
-  { icon: GitBranch, title: "Reliable provider execution", text: "Route to configured providers, apply resilience policies, and keep provider-specific plumbing in adapters." },
-  { icon: Layers3, title: "Response integrity", text: "Check response shape with SchemaLock and detect incomplete streams with StreamGuard." },
-  { icon: Activity, title: "Usage you can account for", text: "Produce metering, cost and audit facts through the execution pipeline." },
+  { title: "Governance at the boundary", text: "Authenticate callers and evaluate policy before a model request leaves your application." },
+  { title: "Reliable provider execution", text: "Route to configured providers, apply resilience policies, and keep provider-specific plumbing in adapters." },
+  { title: "Response integrity", text: "Check response shape with SchemaLock and detect incomplete streams with StreamGuard." },
+  { title: "Usage you can account for", text: "Produce metering, cost and audit facts through the execution pipeline." },
 ];
 
 const stages = ["Ingress", "Identity", "Governance", "Routing", "Reliability", "Secrets", "Provider", "StreamGuard", "SchemaLock", "Metering", "Cost", "Emitter"];
@@ -42,14 +42,14 @@ export default function HomePage() {
       </div></section>
       <BrandStory />
       <section className="section section-ice"><div className="container"><SectionHeading eyebrow="BUILT-IN CAPABILITIES" title="Infrastructure that makes AI dependable." description="Not another chatbot. A purposeful execution layer that helps your team focus on the AI experience instead of reinventing its guardrails."/>
-        <div className="feature-grid">{capabilities.map(({icon: Icon,title,text},i)=><div className="feature-card" key={title}><div className="feature-card-icon"><Icon size={24}/></div><span className="feature-index">0{i+1} / CAPABILITY</span><h3>{title}</h3><p>{text}</p><Link href="/platform" className="text-link">Explore capability <ArrowUpRight size={16}/></Link></div>)}</div>
+        <div className="feature-grid">{capabilities.map(({title,text},i)=><div className="feature-card" key={title}><span className="feature-index">CAPABILITY / 0{i+1}</span><h3>{title}</h3><p>{text}</p><Link href="/platform" className="text-link">Explore capability <ArrowUpRight size={16}/></Link></div>)}</div>
       </div></section>
       <section className="section dark-section"><div className="container"><div className="dark-section-top"><SectionHeading eyebrow="NON-BYPASSABLE BY DESIGN" title="Twelve stages. One accountable path." description="The Java runtime defines a fixed order. A mandatory stage that is not bound prevents startup—rather than silently removing a protection."/><Link className="btn btn-light" href="/how-it-works">Walk through the flow <ArrowUpRight size={17}/></Link></div>
-        <div className="stage-grid">{stages.map((stage,i)=><div key={stage} className="stage-tile"><span>{String(i+1).padStart(2,"0")}</span><strong>{stage}</strong><CircuitBoard size={16}/></div>)}</div>
+        <div className="stage-grid">{stages.map((stage,i)=><div key={stage} className="stage-tile"><span>{String(i+1).padStart(2,"0")}</span><strong>{stage}</strong></div>)}</div>
         <p className="dark-disclaimer">Real stage names from the Java Data Plane. Actual enforcement depends on configured policies and adapters.</p>
       </div></section>
       <section className="section section-white"><div className="container"><SectionHeading eyebrow="BUILT FOR REAL APPLICATIONS" title="Your business logic stays yours." description="Use your existing LLM tools. Let Reliability Gateway own the model-call boundary, not the decisions only your business can make."/>
-        <div className="usecase-grid"><Link href="/solutions#insurance" className="usecase-card"><span className="usecase-icon"><Fingerprint size={26}/></span><span className="eyebrow">INSURANCE</span><h3>Claims processing you can explain.</h3><p>Your app retrieves policies and evaluates claims. The gateway handles access, response structure, streams, and usage.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link><Link href="/solutions#support" className="usecase-card"><span className="usecase-icon"><Sparkles size={26}/></span><span className="eyebrow">CUSTOMER SUPPORT</span><h3>Customer answers with better control.</h3><p>Use RAG and CRM context for helpful replies, with a consistent model request path underneath.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link></div>
+        <div className="usecase-grid"><Link href="/solutions#insurance" className="usecase-card"><span className="eyebrow">INSURANCE</span><h3>Claims processing you can explain.</h3><p>Your app retrieves policies and evaluates claims. The gateway handles access, response structure, streams, and usage.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link><Link href="/solutions#support" className="usecase-card"><span className="eyebrow">CUSTOMER SUPPORT</span><h3>Customer answers with better control.</h3><p>Use RAG and CRM context for helpful replies, with a consistent model request path underneath.</p><span className="text-link">Explore workflow <ArrowUpRight size={17}/></span></Link></div>
       </div></section>
       <TrustBanner />
       <BrandGallery />
