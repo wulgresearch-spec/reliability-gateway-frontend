@@ -17,7 +17,8 @@ async function probe(path: "/health" | "/ready") {
 export async function GET() {
   if (!(await isOperatorAuthenticated())) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   const env = gatewayEnvironment();
-  if (!env.connected) return NextResponse.json({ configured: false, model: null, health: null, readiness: null, checkedAt: new Date().toISOString() }, { headers: { "Cache-Control": "no-store" } });
+  const healthOnly = process.env.GATEWAY_PILOT_HEALTH_ONLY === "true";
+  if (!env.connected) return NextResponse.json({ configured: false, healthOnly, model: null, health: null, readiness: null, checkedAt: new Date().toISOString() }, { headers: { "Cache-Control": "no-store" } });
   const [health, readiness] = await Promise.all([probe("/health"), probe("/ready")]);
-  return NextResponse.json({ configured: true, model: env.model, health, readiness, checkedAt: new Date().toISOString() }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ configured: true, healthOnly, model: env.model, health, readiness, checkedAt: new Date().toISOString() }, { headers: { "Cache-Control": "no-store" } });
 }
